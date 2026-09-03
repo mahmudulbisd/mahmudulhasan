@@ -6,6 +6,7 @@ import { PackagesSection } from "@/components/home/packages-section";
 import { Methodology } from "@/components/home/methodology";
 import { ExperienceSection } from "@/components/home/experience-section";
 import { CaseStudiesSection } from "@/components/home/case-studies-section";
+import { BlogSection } from "@/components/home/blog-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
 import { CtaSection } from "@/components/home/cta-section";
 
@@ -28,6 +29,7 @@ export default function Home() {
       <div id="portfolio">
         <CaseStudiesSection />
       </div>
+      <BlogSection />
       <div id="testimonials">
         <TestimonialsSection />
       </div>

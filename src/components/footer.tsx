@@ -35,8 +35,9 @@ export function Footer() {
   const quickLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/#about" },
-    { name: "Portfolio", href: "/#portfolio" },
-    { name: "Case Studies", href: "/#portfolio" },
+    { name: "Portfolio", href: "/case-studies" },
+    { name: "Case Studies", href: "/case-studies" },
+    { name: "Blog", href: "/blog" },
     { name: "Pricing", href: "/#packages" },
     { name: "Contact", href: "/#contact" },
   ];

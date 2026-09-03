@@ -48,6 +48,10 @@ export async function POST(request: Request) {
   const [firstName = "", ...rest] = name.trim().split(/\s+/);
   const lastName = rest.join(" ");
 
+  const noteContent = service
+    ? `Selected Service: ${service}\n\nMessage:\n${message}`
+    : message;
+
   const payload = {
     firstName,
     lastName,
@@ -55,16 +59,17 @@ export async function POST(request: Request) {
     phone: phone || undefined,
     locationId,
     source: "Website Contact Form",
-    tags: ["website-lead"],
-    customFields: service
-      ? [
-          {
-            id: process.env.GHL_SERVICE_CUSTOM_FIELD_ID,
-            value: service,
-          },
-        ]
-      : [],
-    notes: message,
+    tags: service ? ["website-lead", `service-${service.toLowerCase().replace(/\s+/g, "-")}`] : ["website-lead"],
+    customFields:
+      service && process.env.GHL_SERVICE_CUSTOM_FIELD_ID
+        ? [
+            {
+              id: process.env.GHL_SERVICE_CUSTOM_FIELD_ID,
+              value: service,
+            },
+          ]
+        : [],
+    notes: noteContent,
   };
 
   try {
