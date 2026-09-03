@@ -111,6 +111,28 @@ export async function POST(request: Request) {
       }
     }
 
+    // Create an inbound conversation message in GHL so the submission
+    // shows up in the Conversations tab
+    if (contactId) {
+      try {
+        await fetch("https://services.leadconnectorhq.com/conversations/messages/inbound", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            Version: GHL_API_VERSION,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            type: "SMS",
+            contactId,
+            message: noteContent || message,
+          }),
+        });
+      } catch (inboundErr) {
+        console.error("Failed to create inbound message:", inboundErr);
+      }
+    }
+
     return NextResponse.json({ ok: true, contactId });
   } catch (error) {
     console.error("GHL request error:", error);
