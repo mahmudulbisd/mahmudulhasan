@@ -69,7 +69,6 @@ export async function POST(request: Request) {
             },
           ]
         : [],
-    notes: noteContent,
   };
 
   try {
@@ -87,13 +86,32 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       console.error("GHL contact creation failed:", response.status, data);
-      return NextResponse.json(
-        { error: "We couldn't submit your message. Please try again." },
-        { status: response.status }
-      );
+      const errMsg = Array.isArray(data?.message)
+        ? data.message.join(", ")
+        : data?.message || "We couldn't submit your message. Please try again.";
+      return NextResponse.json({ error: errMsg }, { status: response.status });
     }
 
-    return NextResponse.json({ ok: true, contactId: data?.contact?.id });
+    const contactId = data?.contact?.id;
+
+    // Attach message as a note to the created contact in GHL
+    if (contactId && noteContent) {
+      try {
+        await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            Version: GHL_API_VERSION,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ body: noteContent }),
+        });
+      } catch (noteErr) {
+        console.error("Failed to attach note to contact:", noteErr);
+      }
+    }
+
+    return NextResponse.json({ ok: true, contactId });
   } catch (error) {
     console.error("GHL request error:", error);
     return NextResponse.json(
