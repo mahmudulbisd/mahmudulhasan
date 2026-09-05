@@ -13,7 +13,7 @@ export function QuoteMarquee() {
   const doubled = [...quotes, ...quotes];
   return (
     <div className="py-6 bg-[#0c1220] border-y border-[rgba(245,236,217,0.08)] overflow-hidden">
-      <div className="flex whitespace-nowrap animate-marquee-x">
+      <div className="flex w-max whitespace-nowrap animate-marquee-x">
         {doubled.map((q, i) => (
           <span
             key={i}

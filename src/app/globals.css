@@ -26,12 +26,16 @@ html {
   scroll-behavior: smooth;
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {
@@ -75,6 +79,63 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* ===== WordPress / raw-HTML content (blog, case studies, portfolio) ===== */
+.wp-content {
+  overflow-wrap: break-word;
+}
+.wp-content img,
+.wp-content video,
+.wp-content iframe,
+.wp-content table,
+.wp-content pre,
+.wp-content figure {
+  max-width: 100%;
+}
+.wp-content img,
+.wp-content video {
+  height: auto;
+}
+.wp-content figure {
+  margin-inline: auto;
+}
+.wp-content table {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.wp-content pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.wp-content h1,
+.wp-content h2,
+.wp-content h3,
+.wp-content h4 {
+  color: var(--fg);
+  font-family: var(--font-display), sans-serif;
+  line-height: 1.2;
+}
+.wp-content a {
+  color: #35c8c2;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.wp-content blockquote {
+  border-left: 3px solid rgba(232, 135, 58, 0.6);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: #cbd2e1;
+}
+.wp-content ul,
+.wp-content ol {
+  padding-left: 1.25rem;
+}
+.wp-content li {
+  margin-bottom: 0.4rem;
 }
 
 /* Starfield */
@@ -376,6 +437,35 @@ body {
   animation: soft-pulse 2.4s ease-in-out infinite;
 }
 
+/* Mobile menu overlay */
+@keyframes menu-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-menu-overlay-in {
+  animation: menu-overlay-in 0.25s ease-out forwards;
+}
+
+@keyframes menu-panel-in {
+  from { opacity: 0; transform: translateY(-16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-menu-panel-in {
+  animation: menu-panel-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Tone down fixed cinematic decorations + starfield on small screens */
+@media (max-width: 640px) {
+  .starfield::before,
+  .starfield::after {
+    animation: none;
+    background-size: 220px 220px;
+  }
+  .animate-scanline {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .starfield::before, .starfield::after,
@@ -384,7 +474,8 @@ body {
   .animate-eye-scan, .animate-cube-float, .animate-cube-spin,
   .animate-eve-fly, .animate-plant-grow, .animate-scanline,
   .animate-caret, .animate-drift, .animate-marquee-x, .animate-boot-fade,
-  .text-shimmer, .conic-border::before, .animate-soft-pulse {
+  .text-shimmer, .conic-border::before, .animate-soft-pulse,
+  .animate-menu-overlay-in, .animate-menu-panel-in {
     animation: none !important;
   }
   .scroll-progress { display: none; }

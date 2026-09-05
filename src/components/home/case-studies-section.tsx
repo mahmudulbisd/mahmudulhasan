@@ -12,12 +12,12 @@ export async function CaseStudiesSection() {
   return (
     <section
       id="portfolio"
-      className="py-32 bg-[#0c1220] border-t border-[rgba(245,236,217,0.08)]"
+      className="py-16 md:py-32 bg-[#0c1220] border-t border-[rgba(245,236,217,0.08)]"
     >
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-[#f5ecd9] uppercase tracking-tight font-display">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#f5ecd9] uppercase tracking-tight font-display">
               Mission Logs: <span className="text-gradient">Case Studies</span>
             </h2>
             <Link
@@ -61,10 +61,10 @@ export async function CaseStudiesSection() {
                     </div>
                   </div>
                 </div>
-                <div className="p-6 md:p-8 flex flex-col flex-1">
+                <div className="p-6 md:p-8 flex flex-col flex-1 min-w-0">
                   <div className="mb-4">
                     <span
-                      className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full"
+                      className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full break-words"
                       style={{
                         backgroundColor: "rgba(232,135,58,0.12)",
                         color: "#e8873a",
@@ -73,15 +73,15 @@ export async function CaseStudiesSection() {
                       {cs.tag}
                     </span>
                   </div>
-                  <h4 className="text-xl font-bold text-[#f5ecd9] mb-6">
+                  <h4 className="text-xl font-bold text-[#f5ecd9] mb-6 break-words">
                     {cs.title}
                   </h4>
-                  <div className="space-y-4 flex-1">
+                  <div className="space-y-4 flex-1 min-w-0">
                     <div>
                       <p className="text-[#5f6b8a] text-xs uppercase font-bold tracking-wider mb-1">
                         Challenge
                       </p>
-                      <p className="text-[#cbd2e1] text-sm line-clamp-1">
+                      <p className="text-[#cbd2e1] text-sm line-clamp-1 min-w-0">
                         {cs.challenge}
                       </p>
                     </div>
@@ -89,7 +89,7 @@ export async function CaseStudiesSection() {
                       <p className="text-[#5f6b8a] text-xs uppercase font-bold tracking-wider mb-1">
                         Solution
                       </p>
-                      <p className="text-[#cbd2e1] text-sm font-semibold line-clamp-1">
+                      <p className="text-[#cbd2e1] text-sm font-semibold line-clamp-1 min-w-0">
                         {cs.solution}
                       </p>
                     </div>
@@ -98,7 +98,7 @@ export async function CaseStudiesSection() {
                         <p className="text-[#5f6b8a] text-xs uppercase font-bold tracking-wider mb-1">
                           Result
                         </p>
-                        <p className="text-[#35c8c2] text-base font-bold">
+                        <p className="text-[#35c8c2] text-base font-bold break-words">
                           {cs.result}
                         </p>
                       </div>

@@ -54,19 +54,19 @@ export default async function PortfolioDetailPage({
       <main className="flex-1 pt-24">
         {/* Breadcrumb */}
         <div className="bg-[#0c1220] py-4 border-b border-[rgba(245,236,217,0.08)]">
-          <div className="max-w-7xl mx-auto px-6 flex items-center text-sm text-[#9aa3b8]">
+          <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center text-sm text-[#9aa3b8]">
             <Link href="/" className="hover:text-[#35c8c2] transition-colors">
               Home
             </Link>
-            <ChevronRight className="w-4 h-4 mx-2" />
+            <ChevronRight className="w-4 h-4 mx-1.5 shrink-0" />
             <Link
               href="/portfolio"
               className="hover:text-[#35c8c2] transition-colors"
             >
               Portfolio
             </Link>
-            <ChevronRight className="w-4 h-4 mx-2" />
-            <span className="text-[#f5ecd9] font-medium line-clamp-1">
+            <ChevronRight className="hidden sm:block w-4 h-4 mx-1.5 shrink-0" />
+            <span className="hidden sm:block text-[#f5ecd9] font-medium min-w-0 break-words leading-snug">
               {item.title}
             </span>
           </div>
@@ -80,7 +80,7 @@ export default async function PortfolioDetailPage({
                 <Briefcase size={14} />
                 {item.client}
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-[#f5ecd9] leading-tight font-display">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-[#f5ecd9] leading-tight font-display break-words">
                 {item.title}
               </h1>
               <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-[#9aa3b8]">
@@ -97,16 +97,16 @@ export default async function PortfolioDetailPage({
 
             <div className="grid lg:grid-cols-3 gap-8 items-start">
               <div className="lg:col-span-2">
-                <div className="rounded-3xl overflow-hidden border border-[rgba(245,236,217,0.1)] shadow-2xl">
+                <div className="rounded-3xl overflow-hidden border border-[rgba(245,236,217,0.1)] shadow-2xl aspect-[16/10] md:aspect-[16/9]">
                   {item.featuredImage ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
                       src={item.featuredImage.url}
                       alt={item.featuredImage.alt}
-                      className="w-full h-auto object-cover"
+                      className="w-full h-full object-cover object-top"
                     />
                   ) : (
-                    <div className="aspect-video bg-gradient-to-br from-[rgba(232,135,58,0.2)] to-[rgba(53,200,194,0.15)] flex items-center justify-center">
+                    <div className="w-full h-full bg-gradient-to-br from-[rgba(232,135,58,0.2)] to-[rgba(53,200,194,0.15)] flex items-center justify-center">
                       <Briefcase className="w-16 h-16 text-[#35c8c2]/40" />
                     </div>
                   )}
@@ -119,16 +119,16 @@ export default async function PortfolioDetailPage({
                     Key Results
                   </h3>
                   {metrics.length > 0 ? (
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {metrics.map((m) => (
                         <div
                           key={m.label}
                           className="bg-[rgba(232,135,58,0.08)] border border-[rgba(232,135,58,0.2)] rounded-2xl p-4 text-center"
                         >
-                          <div className="text-2xl font-black text-[#35c8c2] font-display">
+                          <div className="text-2xl font-black text-[#35c8c2] font-display break-words">
                             {m.value}
                           </div>
-                          <div className="text-[11px] font-bold uppercase tracking-wider text-[#9aa3b8] mt-1">
+                          <div className="text-[11px] font-bold uppercase tracking-wider text-[#9aa3b8] mt-1 break-words">
                             {m.label}
                           </div>
                         </div>

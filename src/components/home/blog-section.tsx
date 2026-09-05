@@ -17,12 +17,12 @@ export async function BlogSection() {
   if (posts.length === 0) return null;
 
   return (
-    <section className="py-24 bg-[#0a0e1a]">
+    <section className="py-16 md:py-24 bg-[#0a0e1a]">
       <div className="max-w-7xl mx-auto px-4">
         <Reveal>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-14">
             <div>
-              <h2 className="text-4xl md:text-5xl font-black text-[#f5ecd9] uppercase tracking-tight font-display">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#f5ecd9] uppercase tracking-tight font-display">
                 Latest from the <span className="text-gradient">Journal</span>
               </h2>
               <p className="text-[#9aa3b8] mt-3 max-w-xl">
@@ -63,24 +63,24 @@ export async function BlogSection() {
                     </span>
                   </div>
                 )}
-                <div className="p-6 md:p-7 flex flex-col flex-1">
+                <div className="p-6 md:p-7 flex flex-col flex-1 min-w-0">
                   {post.categories[0] && (
                     <span className="inline-flex items-center self-start px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-[rgba(232,135,58,0.12)] text-[#e8873a] mb-4">
                       {post.categories[0]}
                     </span>
                   )}
-                  <h3 className="text-lg font-bold text-[#f5ecd9] mb-3 leading-snug group-hover:text-[#35c8c2] transition-colors">
+                  <h3 className="text-lg font-bold text-[#f5ecd9] mb-3 leading-snug group-hover:text-[#35c8c2] transition-colors break-words">
                     {post.title}
                   </h3>
-                  <p className="text-[#9aa3b8] text-sm leading-relaxed line-clamp-3 flex-1">
+                  <p className="text-[#9aa3b8] text-sm leading-relaxed line-clamp-3 flex-1 min-w-0">
                     {post.excerpt}
                   </p>
-                  <div className="mt-6 pt-4 border-t border-[rgba(245,236,217,0.08)] flex items-center justify-between text-xs">
-                    <span className="flex items-center gap-1.5 text-[#5f6b8a]">
-                      <CalendarDays size={13} />
-                      {formatDate(post.date)}
+                  <div className="mt-6 pt-4 border-t border-[rgba(245,236,217,0.08)] flex items-center justify-between text-xs gap-2">
+                    <span className="flex items-center gap-1.5 text-[#5f6b8a] min-w-0">
+                      <CalendarDays size={13} className="shrink-0" />
+                      <span className="truncate">{formatDate(post.date)}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1 font-black uppercase tracking-widest text-[#35c8c2]">
+                    <span className="inline-flex items-center gap-1 font-black uppercase tracking-widest text-[#35c8c2] shrink-0">
                       Read
                       <ArrowRight
                         size={13}

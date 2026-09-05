@@ -33,7 +33,7 @@ export default async function BlogPage() {
                 <div className="inline-block px-4 py-1.5 bg-[rgba(232,135,58,0.1)] text-[#e8873a] font-bold text-xs uppercase tracking-widest rounded-full mb-4 border border-[rgba(232,135,58,0.3)] font-display">
                   Mission Logs
                 </div>
-                <h1 className="text-4xl md:text-6xl font-black mb-6 text-[#f5ecd9] font-display">
+                <h1 className="text-4xl md:text-6xl font-black mb-6 text-[#f5ecd9] font-display break-words">
                   Growth <span className="text-gradient">Journal</span>
                 </h1>
                 <p className="text-[#9aa3b8] text-lg md:text-xl max-w-3xl mx-auto">
@@ -82,18 +82,18 @@ export default async function BlogPage() {
                             {post.categories[0]}
                           </span>
                         )}
-                        <h2 className="text-xl font-bold text-[#f5ecd9] mb-3 leading-snug group-hover:text-[#35c8c2] transition-colors">
+                        <h2 className="text-xl font-bold text-[#f5ecd9] mb-3 leading-snug group-hover:text-[#35c8c2] transition-colors break-words">
                           {post.title}
                         </h2>
-                        <p className="text-[#9aa3b8] text-sm leading-relaxed line-clamp-3 flex-1">
+                        <p className="text-[#9aa3b8] text-sm leading-relaxed line-clamp-3 flex-1 min-w-0">
                           {post.excerpt}
                         </p>
-                        <div className="mt-6 pt-5 border-t border-[rgba(245,236,217,0.08)] flex items-center justify-between text-xs">
-                          <span className="flex items-center gap-1.5 text-[#5f6b8a]">
-                            <CalendarDays size={14} />
-                            {formatDate(post.date)}
+                        <div className="mt-6 pt-5 border-t border-[rgba(245,236,217,0.08)] flex items-center justify-between text-xs gap-2">
+                          <span className="flex items-center gap-1.5 text-[#5f6b8a] min-w-0">
+                            <CalendarDays size={14} className="shrink-0" />
+                            <span className="truncate">{formatDate(post.date)}</span>
                           </span>
-                          <span className="inline-flex items-center gap-1 font-black uppercase tracking-widest text-[#35c8c2]">
+                          <span className="inline-flex items-center gap-1 font-black uppercase tracking-widest text-[#35c8c2] shrink-0">
                             Read
                             <ArrowRight
                               size={14}

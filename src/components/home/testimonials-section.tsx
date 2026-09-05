@@ -4,10 +4,10 @@ import { Reveal } from "@/components/reveal";
 
 export function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-32 bg-[#0a0e1a]">
+    <section id="testimonials" className="py-16 md:py-32 bg-[#0a0e1a]">
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="flex flex-col items-center text-center mb-20">
+          <div className="flex flex-col items-center text-center mb-12 md:mb-20">
             <h2 className="text-4xl md:text-5xl font-black text-[#f5ecd9] uppercase tracking-tight mb-4 font-display">
               Captain&apos;s <span className="text-gradient">Feedback</span>
             </h2>
@@ -30,7 +30,7 @@ export function TestimonialsSection() {
                     />
                   ))}
                 </div>
-                <p className="text-[#cbd2e1] italic text-lg flex-1">
+                <p className="text-[#cbd2e1] italic text-lg flex-1 break-words min-w-0">
                   &ldquo;{t.quote}&rdquo;
                 </p>
                 <div className="flex items-center gap-4 mt-4 pt-6 border-t border-[rgba(245,236,217,0.08)]">

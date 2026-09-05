@@ -25,7 +25,7 @@ export default async function PortfolioPage() {
                 <div className="inline-block px-4 py-1.5 bg-[rgba(232,135,58,0.1)] text-[#e8873a] font-bold text-xs uppercase tracking-widest rounded-full mb-4 border border-[rgba(232,135,58,0.3)] font-display">
                   Mission Reports
                 </div>
-                <h1 className="text-4xl md:text-6xl font-black mb-6 text-[#f5ecd9] font-display">
+                <h1 className="text-4xl md:text-6xl font-black mb-6 text-[#f5ecd9] font-display break-words">
                   The <span className="text-gradient">Portfolio</span>
                 </h1>
                 <p className="text-[#9aa3b8] text-lg md:text-xl max-w-3xl mx-auto">
@@ -82,10 +82,10 @@ export default async function PortfolioPage() {
                           <Briefcase size={14} className="text-[#35c8c2]" />
                           {item.client}
                         </div>
-                        <h2 className="text-xl font-bold text-[#f5ecd9] mb-3 leading-snug group-hover:text-[#35c8c2] transition-colors">
+                        <h2 className="text-xl font-bold text-[#f5ecd9] mb-3 leading-snug group-hover:text-[#35c8c2] transition-colors break-words">
                           {item.title}
                         </h2>
-                        <p className="text-[#9aa3b8] text-sm leading-relaxed line-clamp-3 flex-1">
+                        <p className="text-[#9aa3b8] text-sm leading-relaxed line-clamp-3 flex-1 min-w-0">
                           {item.excerpt}
                         </p>
                         {item.metrics && item.metrics.length > 0 && (
@@ -93,16 +93,16 @@ export default async function PortfolioPage() {
                             {item.metrics.slice(0, 3).map((m) => (
                               <span
                                 key={m.label}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgba(53,200,194,0.08)] border border-[rgba(53,200,194,0.2)] text-[#35c8c2] text-xs font-bold"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgba(53,200,194,0.08)] border border-[rgba(53,200,194,0.2)] text-[#35c8c2] text-xs font-bold max-w-full"
                               >
-                                <TrendingUp size={12} />
-                                {m.value}
+                                <TrendingUp size={12} className="shrink-0" />
+                                <span className="truncate">{m.value}</span>
                               </span>
                             ))}
                           </div>
                         )}
-                        <div className="mt-6 pt-5 border-t border-[rgba(245,236,217,0.08)] flex items-center justify-between text-xs">
-                          <span className="font-black uppercase tracking-widest text-[#9aa3b8]">
+                        <div className="mt-6 pt-5 border-t border-[rgba(245,236,217,0.08)] flex items-center justify-between text-xs gap-2">
+                          <span className="font-black uppercase tracking-widest text-[#9aa3b8] min-w-0 truncate">
                             {item.service}
                           </span>
                           <span className="inline-flex items-center gap-1 font-black uppercase tracking-widest text-[#35c8c2]">

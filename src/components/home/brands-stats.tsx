@@ -32,7 +32,7 @@ export function BrandsStats() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#0a0e1a]">
+      <section className="py-14 md:py-24 bg-[#0a0e1a]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[rgba(245,236,217,0.06)] text-center bg-[rgba(21,30,54,0.4)] rounded-2xl border border-[rgba(245,236,217,0.08)] shadow-sm">
             {siteConfig.stats.map((stat) => {

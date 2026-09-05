@@ -96,10 +96,10 @@ export function PackagesSection() {
   const packages = tab === "dfy" ? dfyPackages : aiPackages;
 
   return (
-    <section id="packages" className="py-24 bg-[#0a0e1a]">
+    <section id="packages" className="py-16 md:py-24 bg-[#0a0e1a]">
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <div className="inline-block px-4 py-1.5 bg-[rgba(232,135,58,0.1)] text-[#e8873a] font-bold text-xs uppercase tracking-widest rounded-full mb-4 border border-[rgba(232,135,58,0.3)] font-display">
               Our Packages
             </div>
@@ -169,10 +169,10 @@ export function PackagesSection() {
                   {pkg.features.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-start gap-3 text-sm text-[#cbd2e1]"
+                      className="flex items-start gap-3 text-sm text-[#cbd2e1] min-w-0"
                     >
                       <Check className="w-5 h-5 text-[#35c8c2] shrink-0 mt-0.5" />
-                      <span>{feature}</span>
+                      <span className="break-words">{feature}</span>
                     </li>
                   ))}
                 </ul>

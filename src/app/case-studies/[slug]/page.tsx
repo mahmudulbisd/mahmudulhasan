@@ -37,19 +37,19 @@ export default async function CaseStudyDetailPage({
       <main className="flex-1 pt-24">
         {/* Breadcrumb */}
         <div className="bg-[#0c1220] py-4 border-b border-[rgba(245,236,217,0.08)]">
-          <div className="max-w-7xl mx-auto px-6 flex items-center text-sm text-[#9aa3b8]">
+          <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center text-sm text-[#9aa3b8]">
             <Link href="/" className="hover:text-[#35c8c2] transition-colors">
               Home
             </Link>
-            <ChevronRight className="w-4 h-4 mx-2" />
+            <ChevronRight className="w-4 h-4 mx-1.5 shrink-0" />
             <Link
               href="/case-studies"
               className="hover:text-[#35c8c2] transition-colors"
             >
               Case Studies
             </Link>
-            <ChevronRight className="w-4 h-4 mx-2" />
-            <span className="text-[#f5ecd9] font-medium line-clamp-1">
+            <ChevronRight className="hidden sm:block w-4 h-4 mx-1.5 shrink-0" />
+            <span className="hidden sm:block text-[#f5ecd9] font-medium min-w-0 break-words leading-snug">
               {cs.title}
             </span>
           </div>
@@ -67,7 +67,7 @@ export default async function CaseStudyDetailPage({
               </h1>
               <div className="flex flex-wrap gap-3 mb-10">
                 <span
-                  className="px-4 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full"
+                  className="px-4 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full break-words"
                   style={{
                     backgroundColor: "rgba(232,135,58,0.12)",
                     color: "#e8873a",
@@ -81,16 +81,16 @@ export default async function CaseStudyDetailPage({
               </p>
             </div>
 
-            <div className="bg-[rgba(21,30,54,0.55)] border border-[rgba(245,236,217,0.1)] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="bg-[rgba(21,30,54,0.55)] border border-[rgba(245,236,217,0.1)] rounded-3xl overflow-hidden shadow-2xl aspect-[16/10] md:aspect-[16/9]">
               {cs.image ? (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   src={cs.image}
                   alt={cs.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               ) : (
-                <div className="aspect-video bg-gradient-to-br from-[rgba(232,135,58,0.2)] to-[rgba(53,200,194,0.15)] flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-[rgba(232,135,58,0.2)] to-[rgba(53,200,194,0.15)] flex items-center justify-center">
                   <TrendingUp className="w-16 h-16 text-[#35c8c2]/40" />
                 </div>
               )}

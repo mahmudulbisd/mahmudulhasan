@@ -7,11 +7,11 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="py-24 bg-[#0a0e1a] border-t border-[rgba(245,236,217,0.08)]"
+      className="py-16 md:py-24 bg-[#0a0e1a] border-t border-[rgba(245,236,217,0.08)]"
     >
       <div className="max-w-7xl mx-auto px-6">
         <Reveal>
-          <div className="text-center mb-20">
+          <div className="text-center mb-12 md:mb-20">
             <div className="inline-block px-4 py-1.5 bg-[rgba(232,135,58,0.1)] text-[#e8873a] font-bold text-xs uppercase tracking-widest rounded-full mb-4 border border-[rgba(232,135,58,0.3)] font-display">
               Services
             </div>
@@ -32,10 +32,10 @@ export function ServicesSection() {
                 <div className="w-12 h-12 bg-[rgba(232,135,58,0.12)] rounded-xl flex items-center justify-center mb-6 shrink-0 border border-[rgba(232,135,58,0.3)] group-hover:scale-110 transition-transform">
                   <service.icon className="w-6 h-6 text-[#e8873a]" />
                 </div>
-                <h3 className="font-bold text-xl mb-3 text-[#f5ecd9] font-display">
+                <h3 className="font-bold text-xl mb-3 text-[#f5ecd9] font-display break-words">
                   {service.title}
                 </h3>
-                <p className="text-[#9aa3b8] text-sm leading-relaxed mb-8 flex-grow">
+                <p className="text-[#9aa3b8] text-sm leading-relaxed mb-8 flex-grow min-w-0">
                   {service.description}
                 </p>
                 <a

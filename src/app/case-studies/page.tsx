@@ -25,7 +25,7 @@ export default async function CaseStudiesPage() {
                 <div className="inline-block px-4 py-1.5 bg-[rgba(232,135,58,0.1)] text-[#e8873a] font-bold text-xs uppercase tracking-widest rounded-full mb-4 border border-[rgba(232,135,58,0.3)] font-display">
                   Mission Reports
                 </div>
-                <h1 className="text-4xl md:text-6xl font-black mb-6 text-[#f5ecd9] font-display">
+                <h1 className="text-4xl md:text-6xl font-black mb-6 text-[#f5ecd9] font-display break-words">
                   Case <span className="text-gradient">Studies</span>
                 </h1>
                 <p className="text-[#9aa3b8] text-lg md:text-xl max-w-3xl mx-auto">
@@ -89,15 +89,15 @@ export default async function CaseStudiesPage() {
                             {cs.tag}
                           </span>
                         </div>
-                        <h2 className="text-xl font-bold text-[#f5ecd9] mb-6">
+                        <h2 className="text-xl font-bold text-[#f5ecd9] mb-6 break-words">
                           {cs.title}
                         </h2>
-                        <div className="space-y-4 flex-1">
+                        <div className="space-y-4 flex-1 min-w-0">
                           <div>
                             <p className="text-[#5f6b8a] text-xs uppercase font-bold tracking-wider mb-1">
                               Challenge
                             </p>
-                            <p className="text-[#cbd2e1] text-sm line-clamp-1">
+                            <p className="text-[#cbd2e1] text-sm line-clamp-1 min-w-0">
                               {cs.challenge}
                             </p>
                           </div>
@@ -105,7 +105,7 @@ export default async function CaseStudiesPage() {
                             <p className="text-[#5f6b8a] text-xs uppercase font-bold tracking-wider mb-1">
                               Solution
                             </p>
-                            <p className="text-[#cbd2e1] text-sm font-semibold line-clamp-1">
+                            <p className="text-[#cbd2e1] text-sm font-semibold line-clamp-1 min-w-0">
                               {cs.solution}
                             </p>
                           </div>
@@ -114,7 +114,7 @@ export default async function CaseStudiesPage() {
                               <p className="text-[#5f6b8a] text-xs uppercase font-bold tracking-wider mb-1">
                                 Result
                               </p>
-                              <p className="text-[#35c8c2] text-base font-bold">
+                              <p className="text-[#35c8c2] text-base font-bold break-words">
                                 {cs.result}
                               </p>
                             </div>

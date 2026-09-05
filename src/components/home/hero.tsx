@@ -9,15 +9,15 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#e8873a]/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#35c8c2]/10 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative pt-28 pb-16 md:pt-40 md:pb-28 overflow-hidden">
+      <div className="absolute top-0 right-0 w-[260px] h-[260px] md:w-[600px] md:h-[600px] bg-[#e8873a]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[240px] h-[240px] md:w-[400px] md:h-[400px] bg-[#35c8c2]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left order-2 lg:order-1">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-[rgba(53,200,194,0.08)] text-[#35c8c2] font-bold text-[10px] uppercase tracking-widest mb-8 border border-[rgba(53,200,194,0.3)]">
-              <span className="relative flex h-2 w-2">
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center justify-center lg:justify-start text-center lg:text-left leading-relaxed tracking-[0.2em] lg:tracking-widest space-x-2 px-4 py-2 rounded-full bg-[rgba(53,200,194,0.08)] text-[#35c8c2] font-bold text-[10px] uppercase mb-8 border border-[rgba(53,200,194,0.3)]">
+              <span className="relative flex h-2 w-2 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#35c8c2] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#35c8c2]" />
               </span>
@@ -26,13 +26,13 @@ export function Hero() {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl xl:text-7xl font-black text-[#f5ecd9] leading-[1.1] mb-6 uppercase tracking-tighter font-display">
-              Scale Your <br />
-              <span className="text-shimmer">Digital</span> <br />
+            <h1 className="text-[clamp(2.5rem,13vw,3rem)] md:text-6xl xl:text-7xl font-black text-[#f5ecd9] leading-[1.1] mb-6 uppercase tracking-tighter font-display">
+              Scale Your <br className="hidden sm:block" />
+              <span className="text-shimmer">Digital</span> <br className="hidden sm:block" />
               Authority
             </h1>
 
-            <p className="text-lg md:text-xl text-[#9aa3b8] mb-10 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed min-h-[3.5rem]">
+            <p className="text-base sm:text-lg md:text-xl text-[#9aa3b8] mb-10 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed min-h-[3.5rem]">
               <Typewriter text="Performance Marketing · Meta Ads · Google Ads · LinkedIn Ads · GoHighLevel CRM — 200+ international clients scaled. He spent 700 years tidying a planet; now he's tidying your ad account." />
             </p>
 
@@ -51,7 +51,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative mt-10 lg:mt-0 order-1 lg:order-2">
+          <div className="relative mt-10 lg:mt-0 lg:order-2">
             <TiltCard>
               <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[10px] md:border-[15px] border-[rgba(245,236,217,0.12)] bg-[rgba(21,30,54,0.5)] group aspect-square">
                 <Image
@@ -79,12 +79,12 @@ export function Hero() {
             </TiltCard>
 
             {/* Floating WALL·E mascot — eyes follow your cursor */}
-            <div className="absolute -bottom-10 -left-6 md:-left-10 w-28 h-28 md:w-36 md:h-36">
+            <div className="absolute -bottom-8 -left-3 md:-left-6 w-24 h-24 md:w-36 md:h-36">
               <WalleMascot className="w-full h-full animate-float-slow drop-shadow-[0_10px_20px_rgba(232,135,58,0.25)]" />
             </div>
 
             {/* Plant in a boot — the movie's symbol of hope */}
-            <div className="absolute -top-6 -right-4 md:-right-8 w-24 h-24 md:w-32 md:h-32 animate-plant-grow drop-shadow-[0_0_25px_rgba(53,200,194,0.4)]">
+            <div className="absolute -top-5 -right-2 md:-right-8 w-20 h-20 md:w-32 md:h-32 animate-plant-grow drop-shadow-[0_0_25px_rgba(53,200,194,0.4)]">
               <PlantInBoot className="w-full h-full" />
             </div>
           </div>

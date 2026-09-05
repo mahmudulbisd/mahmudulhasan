@@ -8,13 +8,16 @@ import { siteConfig } from "@/lib/site";
 export function BookingButton({
   children,
   className = "",
+  onClick,
 }: {
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 }) {
   const [open, setOpen] = useState(false);
 
   const openModal = () => {
+    onClick?.();
     if (typeof window !== "undefined" && window.innerWidth < 768) {
       window.open(siteConfig.bookingUrl, "_blank", "noopener,noreferrer");
       return;

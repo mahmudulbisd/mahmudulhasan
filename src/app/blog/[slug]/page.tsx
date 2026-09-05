@@ -47,16 +47,16 @@ export default async function BlogPostPage({
       <main className="flex-1 pt-24">
         {/* Breadcrumb */}
         <div className="bg-[#0c1220] py-4 border-b border-[rgba(245,236,217,0.08)]">
-          <div className="max-w-4xl mx-auto px-6 flex items-center text-sm text-[#9aa3b8]">
+          <div className="max-w-4xl mx-auto px-6 flex flex-wrap items-center text-sm text-[#9aa3b8]">
             <Link href="/" className="hover:text-[#35c8c2] transition-colors">
               Home
             </Link>
-            <ChevronRight className="w-4 h-4 mx-2" />
+            <ChevronRight className="w-4 h-4 mx-1.5 shrink-0" />
             <Link href="/blog" className="hover:text-[#35c8c2] transition-colors">
               Blog
             </Link>
-            <ChevronRight className="w-4 h-4 mx-2" />
-            <span className="text-[#f5ecd9] font-medium line-clamp-1">
+            <ChevronRight className="hidden sm:block w-4 h-4 mx-1.5 shrink-0" />
+            <span className="hidden sm:block text-[#f5ecd9] font-medium min-w-0 break-words leading-snug">
               {post.title}
             </span>
           </div>
@@ -70,7 +70,7 @@ export default async function BlogPostPage({
                   {post.categories[0]}
                 </span>
               )}
-              <h1 className="text-3xl md:text-5xl font-black text-[#f5ecd9] leading-tight mb-8 font-display">
+              <h1 className="text-3xl md:text-5xl font-black text-[#f5ecd9] leading-tight mb-8 font-display break-words">
                 {post.title}
               </h1>
               <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-[#9aa3b8]">
@@ -86,12 +86,12 @@ export default async function BlogPostPage({
             </header>
 
             {post.featuredImage && (
-              <div className="mb-12 rounded-3xl overflow-hidden border border-[rgba(245,236,217,0.08)]">
+              <div className="mb-12 rounded-3xl overflow-hidden border border-[rgba(245,236,217,0.08)] aspect-[16/10] md:aspect-[16/9]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={post.featuredImage}
                   alt={post.title}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             )}
