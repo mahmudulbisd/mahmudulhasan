@@ -1,24 +1,25 @@
-import { WalleRobot } from "@/components/walle-robot";
+import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center px-6">
-        <WalleRobot className="w-32 h-32 mx-auto mb-8 animate-float-slow" />
-        <h1 className="mb-4 text-6xl font-black text-[#e8873a] font-display">
+    <div className="flex min-h-screen items-center justify-center bg-background px-6">
+      <div className="text-center">
+        <p className="text-7xl md:text-8xl font-extrabold text-primary font-display tracking-tight">
           404
-        </h1>
-        <p className="mb-2 text-xl text-[#f5ecd9] font-display">
-          Signal Lost — Page Not Found
         </p>
-        <p className="mb-8 text-[#9aa3b8]">
-          This route drifted into deep space. Let&apos;s get you back to base.
+        <p className="mt-4 mb-2 text-2xl font-bold text-foreground font-display tracking-tight">
+          Page Not Found
+        </p>
+        <p className="mb-8 text-muted">
+          The page you&apos;re looking for doesn&apos;t exist or has been
+          moved.
         </p>
         <a
           href="/"
-          className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-[#e8873a] to-[#b85f1e] text-white font-bold hover:from-[#f2a35f] hover:to-[#c96f2a] transition-all hover:scale-105"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary-dark text-white font-semibold hover:from-primary-hover hover:to-primary transition-all hover:scale-105"
         >
-          Return to Home Base
+          <ArrowLeft size={18} />
+          Back to Home
         </a>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Orbitron, Space_Grotesk } from "next/font/google";
+import { Sora, Inter } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site";
 import { Navbar } from "@/components/navbar";
@@ -7,21 +7,18 @@ import { Footer } from "@/components/footer";
 import { FloatingButtons } from "@/components/floating-buttons";
 import { Analytics } from "@/components/analytics";
 import { RevealScript } from "@/components/reveal-script";
-import { Starfield } from "@/components/starfield";
-import { CinematicOverlays } from "@/components/cinematic-overlays";
 import { ScrollProgress } from "@/components/scroll-progress";
-import { AmbientSound } from "@/components/ambient-sound";
 
-const orbitron = Orbitron({
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-orbitron",
-  weight: ["500", "700", "900"],
+  variable: "--font-sora",
+  weight: ["400", "600", "700", "800"],
 });
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  weight: ["300", "400", "500", "700"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -53,18 +50,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${orbitron.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${sora.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Starfield />
         <ScrollProgress />
-        <CinematicOverlays />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
         <FloatingButtons />
         <Analytics />
-        <AmbientSound />
         <RevealScript />
       </body>
     </html>

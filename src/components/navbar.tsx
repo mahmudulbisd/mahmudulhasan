@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { BookingButton } from "@/components/booking-button";
@@ -50,40 +51,40 @@ export function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 h-24 flex items-center bg-[rgba(10,14,26,0.82)] backdrop-blur-xl border-b border-[rgba(245,236,217,0.08)] transition-all duration-300">
+      <nav className="fixed top-0 left-0 right-0 z-50 h-24 flex items-center bg-background/85 backdrop-blur-xl border-b border-border transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
-          <a
-            href="#home"
+          <Link
+            href="/"
             className="cursor-pointer group"
             aria-label="Go to top"
           >
-            <span className="text-2xl font-black tracking-tighter text-[#f5ecd9] font-display">
+            <span className="text-2xl font-black tracking-tight text-foreground font-display">
               {siteConfig.firstName}
-              <span className="text-[#e8873a] inline-block transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-1">
+              <span className="text-primary inline-block transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-1">
                 {siteConfig.lastName}
               </span>
             </span>
-          </a>
+          </Link>
 
-          <div className="hidden md:flex items-center space-x-12">
+          <div className="hidden md:flex items-center space-x-10">
             {siteConfig.nav.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
-                className="text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-[#35c8c2] text-[#9aa3b8] font-display"
+                className="text-[13px] font-semibold tracking-wide transition-all hover:text-primary-hover text-muted"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
-            <div className="w-px h-8 bg-[rgba(245,236,217,0.1)]" />
-            <BookingButton className="rounded-2xl px-8 py-6 font-black uppercase tracking-widest text-xs shadow-xl hover:scale-105 transition-all font-display bg-gradient-to-r from-[#e8873a] to-[#b85f1e] hover:from-[#f2a35f] hover:to-[#c96f2a]">
+            <div className="w-px h-8 bg-border-strong" />
+            <BookingButton className="rounded-lg px-5 py-2.5 text-sm font-semibold">
               Get Started
             </BookingButton>
           </div>
 
           <button
             ref={toggleRef}
-            className="md:hidden text-[#f5ecd9] p-2 -mr-2"
+            className="md:hidden text-foreground p-2 -mr-2 hover:text-primary transition-colors"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -94,52 +95,80 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu — portaled to <body> so no ancestor backdrop-filter/stacking context can trap it */}
+      {/* Mobile menu — portaled to <body> with solid opaque background */}
       {open &&
         createPortal(
           <div
-            className="fixed inset-0 z-[120] md:hidden"
+            className="fixed inset-0 z-[120] md:hidden bg-background flex flex-col animate-menu-overlay-in"
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
           >
-            <div
-              className="absolute inset-0 bg-[#0a0e1a]/90 backdrop-blur-md animate-menu-overlay-in"
-              onClick={close}
-            />
+            {/* Header inside mobile overlay matching navbar */}
+            <div className="h-24 px-4 max-w-7xl mx-auto w-full flex justify-between items-center border-b border-border flex-shrink-0">
+              <Link
+                href="/"
+                onClick={close}
+                className="cursor-pointer group"
+                aria-label="Go to top"
+              >
+                <span className="text-2xl font-black tracking-tight text-foreground font-display">
+                  {siteConfig.firstName}
+                  <span className="text-primary inline-block transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-1">
+                    {siteConfig.lastName}
+                  </span>
+                </span>
+              </Link>
+
+              <button
+                onClick={close}
+                className="text-foreground p-2 -mr-2 hover:text-primary transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={32} />
+              </button>
+            </div>
+
+            {/* Menu Links & CTA */}
             <div
               ref={panelRef}
               id="mobile-menu"
-              className="relative z-10 flex flex-col items-center justify-start overflow-y-auto pt-24 pb-8 px-6 h-full animate-menu-panel-in"
+              className="flex-1 overflow-y-auto px-6 py-8 flex flex-col justify-between"
             >
-              <div className="w-full flex justify-end">
-                <button
-                  onClick={close}
-                  className="text-[#f5ecd9] p-2 -mr-2"
-                  aria-label="Close menu"
-                >
-                  <X size={32} />
-                </button>
-              </div>
-              <div className="flex flex-col items-center justify-center flex-1 space-y-6 w-full">
+              <div className="flex flex-col items-center space-y-6 my-auto py-2">
                 {siteConfig.nav.map((item, i) => (
-                  <a
+                  <Link
                     key={item.name}
                     ref={i === 0 ? firstLinkRef : undefined}
                     href={item.href}
                     onClick={close}
-                    className="text-2xl font-black uppercase tracking-[0.2em] hover:text-[#35c8c2] text-[#f5ecd9] transition-colors font-display"
+                    className="text-2xl font-bold tracking-tight hover:text-primary-hover text-foreground transition-colors font-display"
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
+
+                <div className="pt-4 w-full flex justify-center">
+                  <BookingButton
+                    onClick={close}
+                    className="w-full max-w-xs rounded-xl px-8 py-4 text-sm font-semibold"
+                  >
+                    Get Started
+                  </BookingButton>
+                </div>
               </div>
-              <BookingButton
-                onClick={close}
-                className="w-full max-w-xs rounded-2xl px-8 py-5 font-black uppercase tracking-widest text-sm shadow-xl font-display bg-gradient-to-r from-[#e8873a] to-[#b85f1e] mt-6"
-              >
-                Get Started
-              </BookingButton>
+
+              <div className="pt-6 border-t border-border flex flex-col items-center gap-1 text-center text-xs text-muted">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="hover:text-accent transition-colors"
+                >
+                  {siteConfig.email}
+                </a>
+                <span className="text-[10px] text-muted-2">
+                  CRM Automation & Performance Marketing
+                </span>
+              </div>
             </div>
           </div>,
           document.body

@@ -2,9 +2,9 @@ export const siteConfig = {
   name: "Mahmudul Hasan",
   firstName: "MAHMUDUL",
   lastName: ".H",
-  tagline: "Performance Marketing & Growth Specialist",
+  tagline: "GoHighLevel CRM & Automation Specialist",
   description:
-    "Performance Marketing Specialist with 4+ years managing Meta Ads, Google Ads, and LinkedIn campaigns for 200+ clients across the US, UK, and Australia. GoHighLevel CRM automation, full-funnel strategy, and measurable growth.",
+    "GoHighLevel CRM & Automation Specialist and performance marketer helping service businesses turn more leads into booked clients. 4+ years running Meta Ads, Google Ads, and LinkedIn campaigns plus 30+ GoHighLevel systems for 200+ clients across the US, UK, and Australia.",
   url: "https://mahmudulhasan.site",
   email: "hello@mahmudulhasan.site",
   phone: "+880 1735993166",
@@ -37,11 +37,11 @@ export const siteConfig = {
     "WordPress",
   ],
   nav: [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
-    { name: "About", href: "#about" },
-    { name: "Portfolio", href: "#portfolio" },
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/#services" },
+    { name: "About", href: "/#about" },
+    { name: "Portfolio", href: "/#portfolio" },
     { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "#contact" },
+    { name: "Contact", href: "/#contact" },
   ],
 };

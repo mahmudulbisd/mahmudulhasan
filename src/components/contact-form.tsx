@@ -53,7 +53,7 @@ export function ContactForm() {
   }
 
   const inputClasses =
-    "w-full bg-white/[0.07] border border-white/10 rounded-xl px-4 py-3 text-[#f5ecd9] placeholder:text-[#9aa3b8]/60 focus:outline-none focus:border-[#35c8c2] focus:ring-2 focus:ring-[#35c8c2]/20 transition-all";
+    "w-full bg-white/[0.06] border border-border rounded-xl px-4 py-3 text-foreground placeholder:text-muted/60 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all";
 
   return (
     <form
@@ -63,7 +63,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="name"
-          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-[#9aa3b8] mb-2"
+          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-muted mb-2"
         >
           Name *
         </label>
@@ -80,7 +80,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-[#9aa3b8] mb-2"
+          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-muted mb-2"
         >
           Email *
         </label>
@@ -97,7 +97,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="phone"
-          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-[#9aa3b8] mb-2"
+          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-muted mb-2"
         >
           Phone
         </label>
@@ -113,7 +113,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="service"
-          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-[#9aa3b8] mb-2"
+          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-muted mb-2"
         >
           What do you need?
         </label>
@@ -123,11 +123,11 @@ export function ContactForm() {
           className={inputClasses + " appearance-none cursor-pointer"}
           defaultValue=""
         >
-          <option value="" disabled className="bg-[#0e1524]">
+          <option value="" disabled className="bg-background">
             Select a service
           </option>
           {services.map((s) => (
-            <option key={s} value={s} className="bg-[#0e1524]">
+            <option key={s} value={s} className="bg-background">
               {s}
             </option>
           ))}
@@ -137,7 +137,7 @@ export function ContactForm() {
       <div className="md:col-span-2">
         <label
           htmlFor="message"
-          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-[#9aa3b8] mb-2"
+          className="block text-[11px] font-bold uppercase tracking-[0.15em] text-muted mb-2"
         >
           Message *
         </label>
@@ -169,7 +169,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#e8873a] to-[#b85f1e] hover:from-[#f2a35f] hover:to-[#c96f2a] disabled:opacity-60 disabled:cursor-not-allowed text-white px-8 py-4 rounded-xl font-bold text-base shadow-xl shadow-[rgba(232,135,58,0.2)] hover:scale-[1.02] transition-all"
+          className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-primary to-primary-dark hover:from-primary-hover hover:to-primary disabled:opacity-60 disabled:cursor-not-allowed text-white px-8 py-4 rounded-xl font-bold text-base shadow-xl shadow-primary/25 hover:scale-[1.02] transition-all"
         >
           {status === "submitting" ? (
             <>

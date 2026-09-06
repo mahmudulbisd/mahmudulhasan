@@ -5,13 +5,23 @@ import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
+const variantClasses: Record<"primary" | "light" | "secondary", string> = {
+  primary:
+    "bg-gradient-to-r from-primary to-primary-dark text-white hover:from-primary-hover hover:to-primary shadow-xl shadow-primary/25",
+  secondary:
+    "bg-transparent border-2 border-accent/70 text-accent hover:bg-accent/10",
+  light: "bg-white text-background hover:bg-foreground shadow-xl shadow-black/10",
+};
+
 export function BookingButton({
   children,
   className = "",
+  variant = "primary",
   onClick,
 }: {
   children: ReactNode;
   className?: string;
+  variant?: "primary" | "light" | "secondary";
   onClick?: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -29,10 +39,7 @@ export function BookingButton({
     <>
       <button
         onClick={openModal}
-        className={
-          "bg-gradient-to-r from-[#e8873a] to-[#b85f1e] text-white hover:from-[#f2a35f] hover:to-[#c96f2a] transition-all cursor-pointer " +
-          className
-        }
+        className={`inline-flex items-center justify-center cursor-pointer transition-all ${variantClasses[variant]} ${className}`}
       >
         {children}
       </button>

@@ -31,7 +31,7 @@ export function FloatingButtons() {
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Scroll to top"
-        className={`fixed bottom-[calc(env(safe-area-inset-bottom)+5.75rem)] right-[calc(env(safe-area-inset-right)+1.75rem)] z-40 flex h-11 w-11 items-center justify-center rounded-full bg-[#1a2237] text-[#35c8c2] border border-[rgba(53,200,194,0.3)] shadow-[0_4px_14px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-[#243047] hover:scale-110 ${
+        className={`fixed bottom-[calc(env(safe-area-inset-bottom)+5.75rem)] right-[calc(env(safe-area-inset-right)+1.75rem)] z-40 flex h-11 w-11 items-center justify-center rounded-full bg-surface-2 text-primary-hover border border-accent/30 shadow-[0_4px_14px_rgba(0,0,0,0.25)] transition-all duration-300 hover:bg-surface hover:scale-110 ${
           showTop
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"

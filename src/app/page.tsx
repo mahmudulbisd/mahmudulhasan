@@ -1,13 +1,13 @@
 import { Hero } from "@/components/home/hero";
-import { QuoteMarquee } from "@/components/home/quote-marquee";
-import { BrandsStats } from "@/components/home/brands-stats";
+import { TrustBar } from "@/components/home/trust-bar";
 import { ServicesSection } from "@/components/home/services-section";
-import { PackagesSection } from "@/components/home/packages-section";
-import { Methodology } from "@/components/home/methodology";
+import { AboutMe } from "@/components/home/about-me";
 import { ExperienceSection } from "@/components/home/experience-section";
 import { CaseStudiesSection } from "@/components/home/case-studies-section";
-import { BlogSection } from "@/components/home/blog-section";
+import { PackagesSection } from "@/components/home/packages-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
+import { Process } from "@/components/home/process";
+import { BlogSection } from "@/components/home/blog-section";
 import { CtaSection } from "@/components/home/cta-section";
 
 export default function Home() {
@@ -16,23 +16,23 @@ export default function Home() {
       <div id="home">
         <Hero />
       </div>
-      <QuoteMarquee />
-      <BrandsStats />
+      <TrustBar />
       <div id="services">
         <ServicesSection />
       </div>
-      <PackagesSection />
-      <Methodology />
       <div id="about">
-        <ExperienceSection />
+        <AboutMe />
       </div>
+      <ExperienceSection />
       <div id="portfolio">
         <CaseStudiesSection />
       </div>
-      <BlogSection />
-      <div id="testimonials">
-        <TestimonialsSection />
+      <div id="packages">
+        <PackagesSection />
       </div>
+      <TestimonialsSection />
+      <Process />
+      <BlogSection />
       <div id="contact">
         <CtaSection />
       </div>

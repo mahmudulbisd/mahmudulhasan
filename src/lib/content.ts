@@ -5,6 +5,50 @@ export interface ExperienceItem {
   description: string;
 }
 
+export interface SkillGroup {
+  category: string;
+  skills: string[];
+}
+
+export const skillGroups: SkillGroup[] = [
+  {
+    category: "CRM & Automation",
+    skills: [
+      "GoHighLevel Setup & Administration",
+      "Workflow & Pipeline Automation",
+      "AI Chatbots & Conversational AI",
+      "SMS/Email Follow-up Sequences",
+    ],
+  },
+  {
+    category: "Paid Media",
+    skills: [
+      "Meta Ads (Facebook & Instagram)",
+      "Google Ads & YouTube",
+      "LinkedIn Advertising",
+      "Pixel & Server-Side Tracking",
+    ],
+  },
+  {
+    category: "Web & Design",
+    skills: [
+      "High-Converting Funnels",
+      "Landing Page Design",
+      "WordPress & Shopify",
+      "Conversion Copywriting",
+    ],
+  },
+  {
+    category: "Operations",
+    skills: [
+      "Project Management (ClickUp/Asana)",
+      "SOP Documentation",
+      "CRM Data Migration",
+      "Team Training & Handover",
+    ],
+  },
+];
+
 export const experience: ExperienceItem[] = [
   {
     company: "Mahmud Digital Solutions",

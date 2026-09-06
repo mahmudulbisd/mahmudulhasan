@@ -1,45 +1,78 @@
 @import "tailwindcss";
 
+/* Legacy literal migration table (used for the value-only sweep of inner pages)
+ * ---------------------------------------------------------------------------
+ * rust (#e8873a / rgba(232,135,58,a))        -> indigo (#6366f1 / rgba(99,102,241,a))
+ * rust dark (#b85f1e)                        -> indigo-600 (#4f46e5)
+ * rust hover light (#f2a35f)                 -> indigo-400 (#818cf8)
+ * rust hover deep (#c96f2a)                  -> indigo-500 (#6366f1)
+ * teal (#35c8c2 / rgba(53,200,194,a))        -> sky (#38bdf8 / rgba(56,189,248,a))
+ * teal hover light (#4fd9d3)                 -> sky-300 (#7dd3fc)
+ * teal dark (#1f8f8a)                        -> sky-600 (#0284c7)
+ * deep teal (#1f4d4b)                        -> blue-800 (#1e40af)
+ * cream (#f5ecd9 / rgba(245,236,217,a))      -> cool white (#eef2f9 / rgba(238,242,249,a))
+ * brown text on white (#7a3d0e)              -> slate-900 (#0f172a)
+ * Neutrals kept: #0a0e1a #0c1220 #0e1524 #9aa3b8 #5f6b8a #cbd2e1
+ *                #6b7280 #161b2b #1a2237 #243047 rgba(21,30,54,a)
+ */
+
 @theme inline {
-  --color-background: var(--bg);
-  --color-foreground: var(--fg);
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-orbitron), var(--font-space-grotesk), sans-serif;
+  --color-background: var(--c-bg);
+  --color-background-alt: var(--c-bg-alt);
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-border: var(--c-border);
+  --color-border-strong: var(--c-border-strong);
+  --color-foreground: var(--c-fg);
+  --color-muted: var(--c-muted);
+  --color-muted-2: var(--c-muted-2);
+  --color-primary: var(--c-primary);
+  --color-primary-hover: var(--c-primary-hover);
+  --color-primary-dark: var(--c-primary-dark);
+  --color-accent: var(--c-accent);
+  --color-accent-hover: var(--c-accent-hover);
+  --color-accent-dark: var(--c-accent-dark);
+  --color-cta-end: var(--c-cta-end);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 :root {
-  --bg: #0a0e1a;
-  --bg-2: #0e1524;
-  --fg: #f5ecd9;
-  --rust: #e8873a;
-  --rust-dark: #b85f1e;
-  --teal: #35c8c2;
-  --teal-dark: #1f8f8a;
-  --muted: #9aa3b8;
-  --card: rgba(21, 30, 54, 0.65);
-  --card-border: rgba(245, 236, 217, 0.12);
-  --nav: rgba(10, 14, 26, 0.82);
+  --c-bg: #0a0e1a;
+  --c-bg-alt: #0c1220;
+  --c-surface: #131d36;
+  --c-surface-2: #1a2742;
+  --c-border: rgba(238, 242, 249, 0.08);
+  --c-border-strong: rgba(238, 242, 249, 0.16);
+  --c-fg: #eef2f9;
+  --c-muted: #9aa3b8;
+  --c-muted-2: #5f6b8a;
+  --c-primary: #6366f1;
+  --c-primary-hover: #818cf8;
+  --c-primary-dark: #4f46e5;
+  --c-accent: #38bdf8;
+  --c-accent-hover: #7dd3fc;
+  --c-accent-dark: #0284c7;
+  --c-cta-end: #1e40af;
+  --nav: rgba(10, 14, 26, 0.85);
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-html {
   overflow-x: clip;
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--c-bg);
+  color: var(--c-fg);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
 
 ::selection {
-  background: rgba(232, 135, 58, 0.4);
+  background: rgba(99, 102, 241, 0.35);
   color: #fff;
 }
 
@@ -51,31 +84,23 @@ body {
   background: #0a0e1a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #243047;
+  background: #1e293b;
   border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #35456b;
+  background: #334155;
 }
 
-/* Reusable dark-glass card (space chrome) */
+/* Reusable dark-glass card */
 .dark-glass-card {
-  background: linear-gradient(145deg, rgba(21, 30, 54, 0.75), rgba(14, 21, 36, 0.6));
-  border: 1px solid rgba(245, 236, 217, 0.12);
+  background: linear-gradient(145deg, rgba(30, 41, 74, 0.7), rgba(15, 23, 42, 0.6));
+  border: 1px solid var(--c-border);
   backdrop-filter: blur(14px);
   box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55);
 }
 
-/* Sci-fi grid + glow helpers */
-.bg-grid {
-  background-image:
-    linear-gradient(to right, rgba(53, 200, 194, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(53, 200, 194, 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-
 .text-gradient {
-  background: linear-gradient(100deg, #e8873a, #f2b26b 45%, #35c8c2);
+  background: linear-gradient(100deg, #818cf8, #c7d2fe 45%, #38bdf8);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -115,17 +140,17 @@ body {
 .wp-content h2,
 .wp-content h3,
 .wp-content h4 {
-  color: var(--fg);
+  color: var(--c-fg);
   font-family: var(--font-display), sans-serif;
   line-height: 1.2;
 }
 .wp-content a {
-  color: #35c8c2;
+  color: #38bdf8;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 .wp-content blockquote {
-  border-left: 3px solid rgba(232, 135, 58, 0.6);
+  border-left: 3px solid rgba(99, 102, 241, 0.6);
   padding-left: 1rem;
   margin-left: 0;
   color: #cbd2e1;
@@ -138,44 +163,7 @@ body {
   margin-bottom: 0.4rem;
 }
 
-/* Starfield */
-.starfield {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 20% 10%, #141d36 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 90%, #0f1a30 0%, transparent 50%),
-    var(--bg);
-}
-.starfield::before,
-.starfield::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
-    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(1.5px 1.5px at 50px 160px, #fff, transparent),
-    radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
-    radial-gradient(1.5px 1.5px at 160px 120px, rgba(255, 255, 255, 0.8), transparent);
-  background-size: 200px 200px;
-  animation: twinkle 4s ease-in-out infinite alternate;
-}
-.starfield::after {
-  background-size: 150px 150px;
-  opacity: 0.5;
-  animation-duration: 6s;
-  animation-delay: 1s;
-}
-@keyframes twinkle {
-  from { opacity: 0.3; }
-  to { opacity: 0.9; }
-}
-
-/* Animations */
+/* Scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -186,22 +174,6 @@ body {
   transform: translateY(0);
 }
 
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-.animate-float-slow {
-  animation: float-slow 7s ease-in-out infinite;
-}
-
-@keyframes beam-sweep {
-  0%, 100% { opacity: 0; transform: scaleX(0.2); transform-origin: left; }
-  50% { opacity: 1; transform: scaleX(1); transform-origin: left; }
-}
-.animate-beam {
-  animation: beam-sweep 3.5s ease-in-out infinite;
-}
-
 @keyframes pulse-ring {
   0% { transform: scale(1); opacity: 0.6; }
   100% { transform: scale(1.8); opacity: 0; }
@@ -210,181 +182,13 @@ body {
   animation: pulse-ring 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-/* ===== WALL·E movie animations ===== */
-
-/* Boot-up charge bar */
-@keyframes boot-charge {
-  0% { width: 0%; }
-  100% { width: 100%; }
+/* Soft ambient pulse for live indicator */
+@keyframes soft-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
-.animate-boot-charge {
-  animation: boot-charge 2.2s ease-in-out forwards;
-}
-
-/* Boot-up blink (WALL-E waking up) */
-@keyframes boot-blink {
-  0%, 40%, 60%, 100% { opacity: 1; transform: scaleY(1); }
-  45%, 55% { opacity: 0.2; transform: scaleY(0.1); }
-}
-.animate-boot-blink {
-  animation: boot-blink 2.2s ease-in-out forwards;
-}
-
-/* Robot eye blink (persistent) */
-@keyframes eye-blink {
-  0%, 92%, 100% { transform: scaleY(1); opacity: 1; }
-  95% { transform: scaleY(0.08); opacity: 0.4; }
-}
-.animate-eye-blink {
-  animation: eye-blink 4.5s ease-in-out infinite;
-  transform-origin: center;
-}
-
-/* Robot eye scanner sweep (like WALL-E's viewfinder) */
-@keyframes eye-scan {
-  0%, 100% { transform: translateX(-8px); opacity: 0.7; }
-  50% { transform: translateX(8px); opacity: 1; }
-}
-.animate-eye-scan {
-  animation: eye-scan 3s ease-in-out infinite;
-}
-
-/* Floating trash cube (WALL-E compacts garbage) */
-@keyframes cube-float {
-  0%, 100% { transform: translateY(0) rotate(-4deg); }
-  50% { transform: translateY(-14px) rotate(4deg); }
-}
-.animate-cube-float {
-  animation: cube-float 8s ease-in-out infinite;
-}
-@keyframes cube-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.animate-cube-spin {
-  animation: cube-spin 18s linear infinite;
-}
-
-/* EVE flying across the screen */
-@keyframes eve-fly {
-  0% { transform: translateX(-15vw) translateY(0) rotate(-6deg); opacity: 0; }
-  8% { opacity: 1; }
-  45% { transform: translateX(45vw) translateY(-18vh) rotate(4deg); opacity: 1; }
-  92% { opacity: 1; }
-  100% { transform: translateX(115vw) translateY(-6vh) rotate(6deg); opacity: 0; }
-}
-.animate-eve-fly {
-  animation: eve-fly 22s linear infinite;
-}
-
-/* The plant growing (movie's heart) */
-@keyframes plant-grow {
-  0% { transform: scale(0.2); opacity: 0; }
-  40% { transform: scale(0.6); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-.animate-plant-grow {
-  animation: plant-grow 3s ease-out forwards;
-}
-
-/* CRT scanline sweep */
-@keyframes scanline {
-  0% { top: -10%; }
-  100% { top: 110%; }
-}
-.animate-scanline {
-  animation: scanline 8s linear infinite;
-}
-
-/* Typewriter text */
-@keyframes blink-caret {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-.animate-caret {
-  animation: blink-caret 1s step-end infinite;
-}
-
-/* Slow drift for hero stars/debris */
-@keyframes drift {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-20px) translateX(12px); }
-}
-.animate-drift {
-  animation: drift 12s ease-in-out infinite;
-}
-
-/* Quote marquee */
-@keyframes marquee-x {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-marquee-x {
-  animation: marquee-x 40s linear infinite;
-}
-
-/* Boot-up fade out */
-@keyframes boot-fade {
-  to { opacity: 0; visibility: hidden; }
-}
-.animate-boot-fade {
-  animation: boot-fade 0.6s ease-in forwards;
-}
-
-/* ===== Modern animation extras ===== */
-
-/* Shimmering gradient text (sweeping highlight) */
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-.text-shimmer {
-  background: linear-gradient(
-    110deg,
-    #e8873a 20%,
-    #f2b26b 40%,
-    #f5ecd9 50%,
-    #35c8c2 60%,
-    #e8873a 80%
-  );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 6s linear infinite;
-}
-
-/* Rotating conic gradient border (holographic edge) */
-@keyframes conic-spin {
-  to { --angle: 360deg; }
-}
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-.conic-border {
-  position: relative;
-}
-.conic-border::before {
-  content: "";
-  position: absolute;
-  inset: -1.5px;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: conic-gradient(
-    from var(--angle),
-    #e8873a,
-    #35c8c2,
-    #f5ecd9,
-    #e8873a
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: conic-spin 6s linear infinite;
-  pointer-events: none;
+.animate-soft-pulse {
+  animation: soft-pulse 2.4s ease-in-out infinite;
 }
 
 /* Mouse spotlight (radial glow follows cursor) */
@@ -398,7 +202,7 @@ body {
   inset: 0;
   background: radial-gradient(
     240px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(53, 200, 194, 0.14),
+    rgba(99, 102, 241, 0.12),
     transparent 60%
   );
   opacity: 0;
@@ -409,32 +213,18 @@ body {
   opacity: 1;
 }
 
-/* Robot pupil tracking (eyes follow cursor) */
-.pupil {
-  transition: transform 0.18s ease-out;
-}
-
 /* Scroll progress bar */
 @keyframes progress-grow {
   from { width: 0%; }
 }
 .scroll-progress {
   height: 3px;
-  background: linear-gradient(90deg, #e8873a, #35c8c2);
+  background: linear-gradient(90deg, #6366f1, #38bdf8);
   width: 0%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 120;
-}
-
-/* Soft ambient pulse for live indicator */
-@keyframes soft-pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-.animate-soft-pulse {
-  animation: soft-pulse 2.4s ease-in-out infinite;
 }
 
 /* Mobile menu overlay */
@@ -454,28 +244,17 @@ body {
   animation: menu-panel-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* Tone down fixed cinematic decorations + starfield on small screens */
-@media (max-width: 640px) {
-  .starfield::before,
-  .starfield::after {
-    animation: none;
-    background-size: 220px 220px;
-  }
-  .animate-scanline {
-    display: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .starfield::before, .starfield::after,
-  .animate-float-slow, .animate-beam, .animate-pulse-ring,
-  .animate-boot-charge, .animate-boot-blink, .animate-eye-blink,
-  .animate-eye-scan, .animate-cube-float, .animate-cube-spin,
-  .animate-eve-fly, .animate-plant-grow, .animate-scanline,
-  .animate-caret, .animate-drift, .animate-marquee-x, .animate-boot-fade,
-  .text-shimmer, .conic-border::before, .animate-soft-pulse,
-  .animate-menu-overlay-in, .animate-menu-panel-in {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-pulse-ring,
+  .animate-soft-pulse,
+  .animate-menu-overlay-in,
+  .animate-menu-panel-in {
     animation: none !important;
   }
   .scroll-progress { display: none; }
