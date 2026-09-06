@@ -2,6 +2,7 @@ import { Check, Mail, Phone, CalendarDays } from "lucide-react";
 import { BookingButton } from "@/components/booking-button";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
+import { WalleRobot } from "@/components/walle-robot";
 import { siteConfig } from "@/lib/site";
 
 const assurances = [
@@ -27,7 +28,10 @@ export function CtaSection() {
                   funnel and follow-up process, then map out exactly where
                   automation and paid media can add revenue.
                 </p>
-                <div className="flex flex-col items-center justify-center gap-6">
+                <div className="flex flex-col items-center justify-center gap-4">
+                  <div className="w-16 h-16 md:w-20 md:h-20">
+                    <WalleRobot className="w-full h-full animate-float-slow drop-shadow-[0_0_20px_rgba(56,189,248,0.35)]" />
+                  </div>
                   <BookingButton
                     variant="light"
                     className="w-full md:w-auto px-8 py-4 rounded-xl font-bold text-base hover:scale-105 transition-all"

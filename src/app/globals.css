@@ -244,6 +244,181 @@ body {
   animation: menu-panel-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* ===== Restored WALL-E cinematic layer ===== */
+
+/* Starfield (deep-space twinkle) */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 10%, #141d36 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 90%, #0f1a30 0%, transparent 50%),
+    var(--c-bg);
+}
+.starfield::before,
+.starfield::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 50px 160px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 160px 120px, rgba(255, 255, 255, 0.8), transparent);
+  background-size: 200px 200px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+.starfield::after {
+  background-size: 150px 150px;
+  opacity: 0.5;
+  animation-duration: 6s;
+  animation-delay: 1s;
+}
+@keyframes twinkle {
+  from { opacity: 0.3; }
+  to { opacity: 0.9; }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+/* Boot-up charge bar */
+@keyframes boot-charge {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+.animate-boot-charge {
+  animation: boot-charge 2.2s ease-in-out forwards;
+}
+
+/* Boot-up blink (WALL-E waking up) */
+@keyframes boot-blink {
+  0%, 40%, 60%, 100% { opacity: 1; transform: scaleY(1); }
+  45%, 55% { opacity: 0.2; transform: scaleY(0.1); }
+}
+.animate-boot-blink {
+  animation: boot-blink 2.2s ease-in-out forwards;
+}
+
+/* Robot eye blink (persistent) */
+@keyframes eye-blink {
+  0%, 92%, 100% { transform: scaleY(1); opacity: 1; }
+  95% { transform: scaleY(0.08); opacity: 0.4; }
+}
+.animate-eye-blink {
+  animation: eye-blink 4.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Robot eye scanner sweep (like WALL-E's viewfinder) */
+@keyframes eye-scan {
+  0%, 100% { transform: translateX(-8px); opacity: 0.7; }
+  50% { transform: translateX(8px); opacity: 1; }
+}
+.animate-eye-scan {
+  animation: eye-scan 3s ease-in-out infinite;
+}
+
+/* Floating trash cube (WALL-E compacts garbage) */
+@keyframes cube-float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-14px) rotate(4deg); }
+}
+.animate-cube-float {
+  animation: cube-float 8s ease-in-out infinite;
+}
+@keyframes cube-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-cube-spin {
+  animation: cube-spin 18s linear infinite;
+}
+
+/* EVE flying across the screen */
+@keyframes eve-fly {
+  0% { transform: translateX(-15vw) translateY(0) rotate(-6deg); opacity: 0; }
+  8% { opacity: 1; }
+  45% { transform: translateX(45vw) translateY(-18vh) rotate(4deg); opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translateX(115vw) translateY(-6vh) rotate(6deg); opacity: 0; }
+}
+.animate-eve-fly {
+  animation: eve-fly 22s linear infinite;
+}
+
+/* The plant growing (movie's heart) */
+@keyframes plant-grow {
+  0% { transform: scale(0.2); opacity: 0; }
+  40% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-plant-grow {
+  animation: plant-grow 3s ease-out forwards;
+}
+
+/* CRT scanline sweep */
+@keyframes scanline {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
+
+/* Typewriter text */
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-caret {
+  animation: blink-caret 1s step-end infinite;
+}
+
+/* Slow drift for hero stars/debris */
+@keyframes drift {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(12px); }
+}
+.animate-drift {
+  animation: drift 12s ease-in-out infinite;
+}
+
+/* Quote marquee */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee-x {
+  animation: marquee-x 40s linear infinite;
+}
+
+/* Robot pupil tracking (eyes follow cursor) */
+.pupil {
+  transition: transform 0.18s ease-out;
+}
+
+/* Tone down fixed cinematic decorations + starfield on small screens */
+@media (max-width: 640px) {
+  .starfield::before,
+  .starfield::after {
+    animation: none;
+    background-size: 220px 220px;
+  }
+  .animate-scanline {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal {
@@ -251,10 +426,13 @@ body {
     transform: none !important;
     transition: none !important;
   }
-  .animate-pulse-ring,
-  .animate-soft-pulse,
-  .animate-menu-overlay-in,
-  .animate-menu-panel-in {
+  .starfield::before, .starfield::after,
+  .animate-float-slow, .animate-pulse-ring, .animate-soft-pulse,
+  .animate-boot-charge, .animate-boot-blink, .animate-eye-blink,
+  .animate-eye-scan, .animate-cube-float, .animate-cube-spin,
+  .animate-eve-fly, .animate-plant-grow, .animate-scanline,
+  .animate-caret, .animate-drift, .animate-marquee-x,
+  .animate-menu-overlay-in, .animate-menu-panel-in {
     animation: none !important;
   }
   .scroll-progress { display: none; }

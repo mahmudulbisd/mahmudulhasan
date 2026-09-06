@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/hero";
+import { QuoteMarquee } from "@/components/home/quote-marquee";
 import { TrustBar } from "@/components/home/trust-bar";
 import { ServicesSection } from "@/components/home/services-section";
 import { AboutMe } from "@/components/home/about-me";
@@ -16,6 +17,7 @@ export default function Home() {
       <div id="home">
         <Hero />
       </div>
+      <QuoteMarquee />
       <TrustBar />
       <div id="services">
         <ServicesSection />

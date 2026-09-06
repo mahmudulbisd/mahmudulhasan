@@ -12,6 +12,7 @@ import {
   Clock,
 } from "lucide-react";
 import { siteConfig } from "@/lib/site";
+import { WalleRobot } from "@/components/walle-robot";
 
 const socialIcons: Record<string, typeof Globe> = {
   Facebook: Globe,
@@ -54,8 +55,8 @@ export function Footer() {
                 .
               </span>
             </a>
-            <div className="w-16 h-16 rounded-2xl bg-surface-2 border border-border flex items-center justify-center font-display text-2xl font-bold text-primary">
-              MH
+            <div className="w-20 h-20">
+              <WalleRobot className="w-full h-full animate-float-slow drop-shadow-[0_0_18px_rgba(56,189,248,0.25)]" />
             </div>
             <p className="text-sm leading-relaxed">
               GoHighLevel CRM &amp; AI Automation Specialist helping service

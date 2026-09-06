@@ -1,27 +1,34 @@
 "use client";
 
-import { useEffect } from "react";
+import Script from "next/script";
+import { siteConfig } from "@/lib/site";
 
 export function Analytics() {
-  useEffect(() => {
-    const gtag = (
-      window as unknown as { dataLayer: unknown[] }
-    ).dataLayer ?? [];
-    const s = document.createElement("script");
-    s.async = true;
-    s.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`;
-    document.head.appendChild(s);
-    const push = (...args: unknown[]) => gtag.push(args);
-    (window as unknown as { gtag: (...args: unknown[]) => void }).gtag = push;
-    (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
-      "js",
-      new Date()
-    );
-    (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
-      "config",
-      process.env.NEXT_PUBLIC_GA_ID
-    );
-  }, []);
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || siteConfig.analyticsId;
 
-  return null;
+  if (!gaId) return null;
+
+  return (
+    <>
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gaId}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
+    </>
+  );
 }
+

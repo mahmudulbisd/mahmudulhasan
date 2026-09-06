@@ -5,6 +5,8 @@ import { siteConfig } from "@/lib/site";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { FloatingButtons } from "@/components/floating-buttons";
+import { Starfield } from "@/components/starfield";
+import { CinematicOverlays } from "@/components/cinematic-overlays";
 import { Analytics } from "@/components/analytics";
 import { RevealScript } from "@/components/reveal-script";
 import { ScrollProgress } from "@/components/scroll-progress";
@@ -53,6 +55,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${sora.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Starfield />
+        <CinematicOverlays />
         <ScrollProgress />
         <Navbar />
         <main className="flex-1">{children}</main>
