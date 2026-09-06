@@ -109,7 +109,7 @@ interface WpMedia {
 // ---------------------------------------------------------------------------
 
 const WP_FIELDS =
-  "id,slug,title,excerpt,content,date,featured_media,_embedded,categories,tags";
+  "id,slug,title,excerpt,content,date,featured_media,_links,_embedded,categories,tags";
 
 interface RawPost {
   id: number;
