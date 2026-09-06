@@ -1,5 +1,23 @@
 import { caseStudies as fallbackCaseStudies } from "@/lib/content";
 
+
+function decodeHtmlEntities(html: string): string {
+  if (!html) return "";
+  return html
+    .replace(/&#038;/g, "&")
+    .replace(/&amp;/g, "&")
+    .replace(/&#8211;/g, "-")
+    .replace(/&#8212;/g, "-")
+    .replace(/&#8216;/g, "'")
+    .replace(/&#8217;/g, "'")
+    .replace(/&#8220;/g, '"')
+    .replace(/&#8221;/g, '"')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
+
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -216,7 +234,7 @@ function mapCaseStudy(post: RawPost): WpCaseStudy {
     (t) => t.toLowerCase().replace(/\s+/g, "-") !== caseStudyTagSlug()
   );
 
-  const title = post.title?.rendered ?? "Untitled";
+  const title = decodeHtmlEntities(post.title?.rendered ?? "Untitled");
   const excerpt = cleanExcerpt(post.excerpt?.rendered, 180);
   const firstSentence = excerpt.split(/(?<=[.!?])\s+/)[0] || excerpt;
 
@@ -474,7 +492,7 @@ function mapPortfolioItem(item: RawPortfolioItem): PortfolioItem {
     featured?.media_details?.sizes?.large?.source_url ??
     featured?.media_details?.sizes?.medium_large?.source_url ??
     featured?.source_url;
-  const title = item.title?.rendered ?? "Untitled";
+  const title = decodeHtmlEntities(item.title?.rendered ?? "Untitled");
 
   return {
     id: item.id,

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import { getPortfolioItems } from "@/lib/wordpress";
 import { Reveal } from "@/components/reveal";
-import Image from "next/image";
 
 export async function CaseStudiesSection() {
   const caseStudies = (await getPortfolioItems()).slice(0, 3);
@@ -43,11 +42,9 @@ export async function CaseStudiesSection() {
               >
                 <div className="relative aspect-video w-full overflow-hidden">
                   {cs.featuredImage ? (
-                    <Image
+                    <img
                       src={cs.featuredImage.url}
                       alt={cs.title}
-                      width={640}
-                      height={360}
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
                   ) : (
