@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { getCaseStudies } from "@/lib/wordpress";
+import { ArrowRight, TrendingUp } from "lucide-react";
+import { getPortfolioItems } from "@/lib/wordpress";
 import { Reveal } from "@/components/reveal";
 import Image from "next/image";
 
 export async function CaseStudiesSection() {
-  const caseStudies = (await getCaseStudies()).slice(0, 3);
+  const caseStudies = (await getPortfolioItems()).slice(0, 3);
 
   if (caseStudies.length === 0) return null;
 
@@ -22,11 +22,11 @@ export async function CaseStudiesSection() {
                 Results
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight font-display">
-                Case <span className="text-gradient">Studies</span>
+                Portfolio & <span className="text-gradient">Case Studies</span>
               </h2>
             </div>
             <Link
-              href="/case-studies"
+              href="/portfolio"
               className="text-accent font-bold uppercase text-xs tracking-widest border-b-2 border-accent/30 hover:border-accent transition-all pb-1 cursor-pointer w-fit"
             >
               All Projects
@@ -38,13 +38,13 @@ export async function CaseStudiesSection() {
           {caseStudies.map((cs, i) => (
             <Reveal key={cs.slug} delay={i * 120}>
               <Link
-                href={`/case-studies/${cs.slug}`}
+                href={`/portfolio/${cs.slug}`}
                 className="group cursor-pointer flex flex-col rounded-3xl overflow-hidden bg-surface/50 shadow-lg border border-border hover:border-primary/40 h-full"
               >
                 <div className="relative aspect-video w-full overflow-hidden">
-                  {cs.image ? (
+                  {cs.featuredImage ? (
                     <Image
-                      src={cs.image}
+                      src={cs.featuredImage.url}
                       alt={cs.title}
                       width={640}
                       height={360}
@@ -55,7 +55,7 @@ export async function CaseStudiesSection() {
                   )}
                   <div className="absolute inset-0 bg-background/80 p-6 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-all duration-500">
                     <span className="bg-gradient-to-r from-primary to-primary-dark text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      {cs.industry}
+                      {cs.client || "Client Project"}
                     </span>
                     <div className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
                       <span>View Case Study</span>
@@ -71,37 +71,27 @@ export async function CaseStudiesSection() {
                     <span
                       className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full break-words bg-primary/10 text-primary-hover border border-primary/20"
                     >
-                      {cs.tag}
+                      {cs.service || "Strategy"}
                     </span>
                   </div>
                   <h4 className="text-xl font-bold text-foreground mb-6 break-words">
                     {cs.title}
                   </h4>
-                  <div className="space-y-4 flex-1 min-w-0">
-                    <div>
-                      <p className="text-muted-2 text-xs uppercase font-bold tracking-wider mb-1">
-                        Challenge
-                      </p>
-                      <p className="text-[#cbd2e1] text-sm line-clamp-1 min-w-0">
-                        {cs.challenge}
-                      </p>
+                  <div className="space-y-4 flex-1 flex flex-col min-w-0">
+                    <div className="flex-1">
+                      <p className="text-[#cbd2e1] text-sm line-clamp-3 min-w-0" dangerouslySetInnerHTML={{ __html: cs.excerpt }} />
                     </div>
-                    <div>
-                      <p className="text-muted-2 text-xs uppercase font-bold tracking-wider mb-1">
-                        Solution
-                      </p>
-                      <p className="text-[#cbd2e1] text-sm font-semibold line-clamp-1 min-w-0">
-                        {cs.solution}
-                      </p>
-                    </div>
-                    {cs.result && (
-                      <div>
-                        <p className="text-muted-2 text-xs uppercase font-bold tracking-wider mb-1">
-                          Result
+                    {cs.metrics && cs.metrics.length > 0 && (
+                      <div className="mt-4 pt-4 border-t border-border">
+                        <p className="text-muted-2 text-xs uppercase font-bold tracking-wider mb-2">
+                          Key Result
                         </p>
-                        <p className="text-accent text-base font-bold break-words">
-                          {cs.result}
-                        </p>
+                        <div className="flex items-center gap-2">
+                          <TrendingUp size={16} className="text-accent" />
+                          <p className="text-accent text-base font-bold break-words">
+                            {cs.metrics[0].value}
+                          </p>
+                        </div>
                       </div>
                     )}
                   </div>
