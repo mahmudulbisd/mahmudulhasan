@@ -4,12 +4,32 @@ import { ArrowRight, CalendarDays, FolderOpen } from "lucide-react";
 import { getPosts } from "@/lib/wordpress";
 import { Reveal } from "@/components/reveal";
 
+import { siteConfig } from "@/lib/site";
+
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Blog",
+  title: "Blog & Growth Marketing Insights",
   description:
-    "Growth marketing insights on GoHighLevel automation, paid ads, funnels, and AI from Mahmudul Hasan.",
+    "Expert insights on GoHighLevel automation, Meta & Google Ads, sales funnels, and CRM architecture from Mahmudul Hasan.",
+  alternates: {
+    canonical: `${siteConfig.url}/blog`,
+  },
+  openGraph: {
+    title: `Blog & Growth Insights — ${siteConfig.name}`,
+    description:
+      "Expert insights on GoHighLevel automation, Meta & Google Ads, sales funnels, and CRM architecture.",
+    url: `${siteConfig.url}/blog`,
+    type: "website",
+    images: [{ url: siteConfig.avatar, width: 1200, height: 1200, alt: "Blog" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Blog & Growth Insights — ${siteConfig.name}`,
+    description:
+      "Expert insights on GoHighLevel automation, Meta & Google Ads, sales funnels, and CRM architecture.",
+    images: [siteConfig.avatar],
+  },
 };
 
 function formatDate(iso: string) {
@@ -23,8 +43,31 @@ function formatDate(iso: string) {
 export default async function BlogPage() {
   const posts = await getPosts();
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteConfig.url}/blog`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0e1a] flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="flex-1 pt-24">
         <section className="py-20 bg-[#0c1220] border-b border-[rgba(238,242,249,0.08)]">
           <div className="max-w-7xl mx-auto px-6">

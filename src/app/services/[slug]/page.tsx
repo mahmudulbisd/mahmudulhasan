@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ChevronRight, Check, ChevronDown } from "lucide-react";
 import { services } from "@/lib/services";
+import { siteConfig } from "@/lib/site";
 import { BookingButton } from "@/components/booking-button";
 import { Reveal } from "@/components/reveal";
 
@@ -19,9 +20,26 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
+  const pageUrl = `${siteConfig.url}/services/${slug}`;
   return {
-    title: service.title,
+    title: `${service.title} — ${siteConfig.name}`,
     description: service.description,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: `${service.title} — ${siteConfig.name}`,
+      description: service.description,
+      url: pageUrl,
+      type: "website",
+      images: [{ url: siteConfig.avatar, width: 1200, height: 1200, alt: service.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.title} — ${siteConfig.name}`,
+      description: service.description,
+      images: [siteConfig.avatar],
+    },
   };
 }
 
@@ -35,9 +53,61 @@ export default async function ServiceDetailPage({
   if (!service) notFound();
 
   const Icon = service.icon;
+  const serviceUrl = `${siteConfig.url}/services/${slug}`;
+
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.title,
+    description: service.description,
+    provider: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    areaServed: ["United States", "United Kingdom", "Australia", "Worldwide"],
+    offers: {
+      "@type": "Offer",
+      price: service.startingPrice.replace(/[^0-9]/g, ""),
+      priceCurrency: "USD",
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${siteConfig.url}/services`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: service.title,
+        item: serviceUrl,
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0e1a] flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="flex-1 pt-24">
         {/* Breadcrumb */}
         <div className="bg-[#0c1220] py-4 border-b border-[rgba(238,242,249,0.08)]">

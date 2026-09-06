@@ -2,21 +2,63 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import { getCaseStudies } from "@/lib/wordpress";
+import { siteConfig } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Case Studies",
+  title: "Client Case Studies & Proven Results",
   description:
-    "Real results from GoHighLevel automation, paid ads, and funnel projects for service businesses.",
+    "Real ROI and growth results from GoHighLevel CRM setup, Meta & Google Ads campaigns, and sales funnels by Mahmudul Hasan.",
+  alternates: {
+    canonical: `${siteConfig.url}/case-studies`,
+  },
+  openGraph: {
+    title: `Client Case Studies & Results — ${siteConfig.name}`,
+    description:
+      "Real ROI and growth results from GoHighLevel CRM setup, Meta & Google Ads campaigns, and sales funnels.",
+    url: `${siteConfig.url}/case-studies`,
+    type: "website",
+    images: [{ url: siteConfig.avatar, width: 1200, height: 1200, alt: "Case Studies" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Client Case Studies & Results — ${siteConfig.name}`,
+    description:
+      "Real ROI and growth results from GoHighLevel CRM setup, Meta & Google Ads campaigns, and sales funnels.",
+    images: [siteConfig.avatar],
+  },
 };
 
 export default async function CaseStudiesPage() {
   const caseStudies = await getCaseStudies();
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Case Studies",
+        item: `${siteConfig.url}/case-studies`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0e1a] flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="flex-1 pt-24">
         <section className="py-20 bg-[#0c1220] border-b border-[rgba(238,242,249,0.08)]">
           <div className="max-w-7xl mx-auto px-6">

@@ -65,7 +65,7 @@ export function Hero() {
               <div className="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-primary/20 border-[6px] md:border-[10px] border-border-strong bg-surface/50 mx-auto max-w-md lg:max-w-none">
                 <Image
                   src={siteConfig.avatar}
-                  alt={siteConfig.name}
+                  alt={`${siteConfig.name} — ${siteConfig.tagline}`}
                   width={1200}
                   height={1200}
                   className="w-full h-full object-cover aspect-square"

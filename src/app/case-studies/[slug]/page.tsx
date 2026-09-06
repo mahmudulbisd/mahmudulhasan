@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Target, Wrench, TrendingUp } from "lucide-react";
 import { getCaseStudyBySlug } from "@/lib/wordpress";
+import { siteConfig } from "@/lib/site";
 import { BookingButton } from "@/components/booking-button";
 
 export const revalidate = 3600;
@@ -15,10 +16,29 @@ export async function generateMetadata({
   const { slug } = await params;
   const cs = await getCaseStudyBySlug(slug);
   if (!cs) return {};
+  const pageUrl = `${siteConfig.url}/case-studies/${slug}`;
+  const desc = cs.result || cs.challenge;
+  const image = cs.image || siteConfig.avatar;
+
   return {
-    title: cs.title,
-    description: cs.result || cs.challenge,
-    openGraph: cs.image ? { images: [{ url: cs.image }] } : undefined,
+    title: `${cs.title} — Case Study | ${siteConfig.name}`,
+    description: desc,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: `${cs.title} — Case Study`,
+      description: desc,
+      url: pageUrl,
+      type: "article",
+      images: [{ url: image, alt: cs.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${cs.title} — Case Study`,
+      description: desc,
+      images: [image],
+    },
   };
 }
 
@@ -31,8 +51,70 @@ export default async function CaseStudyDetailPage({
   const cs = await getCaseStudyBySlug(slug);
   if (!cs) notFound();
 
+  const pageUrl = `${siteConfig.url}/case-studies/${slug}`;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: cs.title,
+    description: cs.result || cs.challenge,
+    image: cs.image || siteConfig.avatar,
+    datePublished: cs.date,
+    dateModified: cs.date,
+    author: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: siteConfig.avatar,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Case Studies",
+        item: `${siteConfig.url}/case-studies`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: cs.title,
+        item: pageUrl,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0e1a] flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="flex-1 pt-24">
         {/* Breadcrumb */}
         <div className="bg-[#0c1220] py-4 border-b border-[rgba(238,242,249,0.08)]">

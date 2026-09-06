@@ -2,21 +2,63 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Briefcase, TrendingUp } from "lucide-react";
 import { getPortfolioItems } from "@/lib/wordpress";
+import { siteConfig } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Client Portfolio & Growth Projects",
   description:
-    "A selection of growth systems, ad campaigns, and CRM builds that delivered measurable results for clients.",
+    "A showcase of high-converting Meta & Google ad campaigns, GoHighLevel systems, and marketing funnels by Mahmudul Hasan.",
+  alternates: {
+    canonical: `${siteConfig.url}/portfolio`,
+  },
+  openGraph: {
+    title: `Client Portfolio & Growth Projects — ${siteConfig.name}`,
+    description:
+      "A showcase of high-converting Meta & Google ad campaigns, GoHighLevel systems, and marketing funnels.",
+    url: `${siteConfig.url}/portfolio`,
+    type: "website",
+    images: [{ url: siteConfig.avatar, width: 1200, height: 1200, alt: "Portfolio" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Client Portfolio & Growth Projects — ${siteConfig.name}`,
+    description:
+      "A showcase of high-converting Meta & Google ad campaigns, GoHighLevel systems, and marketing funnels.",
+    images: [siteConfig.avatar],
+  },
 };
 
 export default async function PortfolioPage() {
   const items = await getPortfolioItems();
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Portfolio",
+        item: `${siteConfig.url}/portfolio`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0e1a] flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="flex-1 pt-24">
         <section className="py-20 bg-[#0c1220] border-b border-[rgba(238,242,249,0.08)]">
           <div className="max-w-7xl mx-auto px-6">

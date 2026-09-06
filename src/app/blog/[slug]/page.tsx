@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, CalendarDays, User } from "lucide-react";
 import { getPostBySlug } from "@/lib/wordpress";
+import { siteConfig } from "@/lib/site";
 import { BookingButton } from "@/components/booking-button";
 
 export const revalidate = 3600;
@@ -23,12 +24,30 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return {};
+  const pageUrl = `${siteConfig.url}/blog/${slug}`;
+  const image = post.featuredImage || siteConfig.avatar;
+
   return {
-    title: post.title,
+    title: `${post.title} — ${siteConfig.name} Blog`,
     description: post.excerpt,
-    openGraph: post.featuredImage
-      ? { images: [{ url: post.featuredImage }] }
-      : undefined,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: pageUrl,
+      type: "article",
+      publishedTime: post.date,
+      authors: [siteConfig.name],
+      images: [{ url: image, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [image],
+    },
   };
 }
 
@@ -41,8 +60,70 @@ export default async function BlogPostPage({
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
+  const postUrl = `${siteConfig.url}/blog/${slug}`;
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.featuredImage || siteConfig.avatar,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: siteConfig.avatar,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteConfig.url}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: postUrl,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0e1a] flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="flex-1 pt-24">
         {/* Breadcrumb */}
         <div className="bg-[#0c1220] py-4 border-b border-[rgba(238,242,249,0.08)]">

@@ -30,22 +30,100 @@ export const metadata: Metadata = {
     template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  icons: {
-    icon: "/favicon.svg",
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  alternates: {
+    canonical: "./",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: "/icon.svg",
+  },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
     type: "website",
     url: siteConfig.url,
-    images: [{ url: siteConfig.avatar }],
+    siteName: siteConfig.name,
+    locale: "en_US",
+    images: [
+      {
+        url: siteConfig.avatar,
+        width: 1200,
+        height: 1200,
+        alt: `${siteConfig.name} - ${siteConfig.tagline}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    creator: "@mahmudulbisd",
     images: [siteConfig.avatar],
   },
+  verification: siteConfig.googleSiteVerification
+    ? { google: siteConfig.googleSiteVerification }
+    : undefined,
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteConfig.url}/#person`,
+      name: siteConfig.name,
+      jobTitle: siteConfig.tagline,
+      description: siteConfig.description,
+      url: siteConfig.url,
+      image: siteConfig.avatar,
+      sameAs: siteConfig.socials.map((s) => s.href),
+      knowsAbout: siteConfig.keywords,
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${siteConfig.url}/#business`,
+      name: `${siteConfig.name} - Growth Marketing & CRM Automation`,
+      url: siteConfig.url,
+      logo: siteConfig.avatar,
+      image: siteConfig.avatar,
+      description: siteConfig.description,
+      telephone: siteConfig.phone,
+      email: siteConfig.email,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bogra",
+        addressCountry: "BD",
+      },
+      priceRange: "$$$",
+      areaServed: ["United States", "United Kingdom", "Australia", "Worldwide"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+      description: siteConfig.description,
+      publisher: {
+        "@id": `${siteConfig.url}/#person`,
+      },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -55,6 +133,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${sora.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Starfield />
         <CinematicOverlays />
         <ScrollProgress />

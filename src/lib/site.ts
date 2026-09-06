@@ -13,6 +13,22 @@ export const siteConfig = {
   bookingUrl:
     "https://link.mahmudulhasan.site/widget/booking/kN5UNPMnHRyaVheY5y5F",
   analyticsId: "G-L2RCTXMK5C",
+  googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+  keywords: [
+    "Mahmudul Hasan",
+    "GoHighLevel Specialist",
+    "GoHighLevel CRM Setup",
+    "Performance Marketing Specialist",
+    "Meta Ads Expert",
+    "Google Ads Consultant",
+    "Marketing Automation Specialist",
+    "Full-Funnel Marketing",
+    "B2B Lead Generation",
+    "CRM Automation Bangladesh",
+    "Media Buyer",
+    "Digital Marketing Consultant",
+    "Zapier Make Automation",
+  ],
   avatar:
     "https://res.cloudinary.com/dhrw2imoh/image/upload/v1739885761/Mahmud_Linkedin_3000_x_3000_px_bthces.png",
   socials: [

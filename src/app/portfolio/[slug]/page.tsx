@@ -9,6 +9,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { getPortfolioItemBySlug } from "@/lib/wordpress";
+import { siteConfig } from "@/lib/site";
 import { BookingButton } from "@/components/booking-button";
 
 export const revalidate = 60;
@@ -28,12 +29,28 @@ export async function generateMetadata({
   const { slug } = await params;
   const item = await getPortfolioItemBySlug(slug);
   if (!item) return {};
+  const pageUrl = `${siteConfig.url}/portfolio/${slug}`;
+  const image = item.featuredImage?.url || siteConfig.avatar;
+
   return {
-    title: item.title,
+    title: `${item.title} — Portfolio | ${siteConfig.name}`,
     description: item.excerpt,
-    openGraph: item.featuredImage
-      ? { images: [{ url: item.featuredImage.url }] }
-      : undefined,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: `${item.title} — Portfolio`,
+      description: item.excerpt,
+      url: pageUrl,
+      type: "article",
+      images: [{ url: image, alt: item.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${item.title} — Portfolio`,
+      description: item.excerpt,
+      images: [image],
+    },
   };
 }
 
@@ -47,9 +64,62 @@ export default async function PortfolioDetailPage({
   if (!item) notFound();
 
   const metrics = item.metrics ?? [];
+  const pageUrl = `${siteConfig.url}/portfolio/${slug}`;
+
+  const portfolioJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: item.title,
+    description: item.excerpt,
+    image: item.featuredImage?.url || siteConfig.avatar,
+    dateCreated: item.date,
+    author: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    provider: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Portfolio",
+        item: `${siteConfig.url}/portfolio`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: item.title,
+        item: pageUrl,
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0e1a] flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(portfolioJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="flex-1 pt-24">
         {/* Breadcrumb */}
         <div className="bg-[#0c1220] py-4 border-b border-[rgba(238,242,249,0.08)]">

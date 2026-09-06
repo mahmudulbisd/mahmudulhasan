@@ -1,19 +1,61 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { services } from "@/lib/services";
+import { siteConfig } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Growth & Automation Services",
   description:
-    "GoHighLevel CRM setup, AI automation, funnel design, Facebook ads, Shopify/WordPress development, and project management services.",
+    "End-to-end GoHighLevel CRM setup, Meta & Google Ads management, sales funnels, and marketing automation services by Mahmudul Hasan.",
+  alternates: {
+    canonical: `${siteConfig.url}/services`,
+  },
+  openGraph: {
+    title: `Growth & Automation Services — ${siteConfig.name}`,
+    description:
+      "End-to-end GoHighLevel CRM setup, Meta & Google Ads management, sales funnels, and marketing automation services.",
+    url: `${siteConfig.url}/services`,
+    type: "website",
+    images: [{ url: siteConfig.avatar, width: 1200, height: 1200, alt: "Services" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Growth & Automation Services — ${siteConfig.name}`,
+    description:
+      "End-to-end GoHighLevel CRM setup, Meta & Google Ads management, sales funnels, and marketing automation services.",
+    images: [siteConfig.avatar],
+  },
 };
 
 export default function ServicesPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${siteConfig.url}/services`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0e1a] flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <main className="flex-1 pt-24">
         <section className="py-20 bg-[#0c1220] border-b border-[rgba(238,242,249,0.08)]">
           <div className="max-w-7xl mx-auto px-6">
