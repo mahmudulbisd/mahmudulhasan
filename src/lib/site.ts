@@ -5,7 +5,7 @@ export const siteConfig = {
   tagline: "GoHighLevel CRM & Automation Specialist",
   description:
     "GoHighLevel CRM & Automation Specialist and performance marketer helping service businesses turn more leads into booked clients. 4+ years running Meta Ads, Google Ads, and LinkedIn campaigns plus 30+ GoHighLevel systems for 200+ clients across the US, UK, and Australia.",
-  url: "https://mahmudulhasan.site",
+  url: "https://www.mahmudulhasan.site",
   email: "hello@mahmudulhasan.site",
   phone: "+880 1735993166",
   whatsapp: "https://wa.me/+8801735993166",
