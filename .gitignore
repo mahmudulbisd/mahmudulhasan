@@ -51,3 +51,7 @@ upload-*.js
 test-*.js
 decode.js
 wp_res.json
+
+# extracted media assets
+extracted-images/
+
