@@ -42,3 +42,12 @@ next-env.d.ts
 
 # command code
 .commandcode
+
+# local seeding & migration scripts (contain credentials)
+publish-*.js
+rewrite-*.js
+update-*.js
+upload-*.js
+test-*.js
+decode.js
+wp_res.json
